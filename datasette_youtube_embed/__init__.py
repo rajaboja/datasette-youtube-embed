@@ -47,12 +47,9 @@ def render_cell(value):
 
 
 @hookimpl
-def extra_css_urls(columns):
-    if columns:
-        return ["/-/static-plugins/datasette_youtube_embed/lite-yt-embed.css"]
-
+def extra_css_urls():
+    return ["https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.css"]
 
 @hookimpl
-def extra_js_urls(columns):
-    if columns:
-        return ["/-/static-plugins/datasette_youtube_embed/lite-yt-embed.js"]
+def extra_js_urls():
+    return ["https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.js"]

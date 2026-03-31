@@ -51,5 +51,6 @@ def extra_css_urls():
     return ["https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.css"]
 
 @hookimpl
-def extra_js_urls():
-    return ["https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.js"]
+def extra_body_script():
+    import urllib.request
+    return urllib.request.urlopen('https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.js').read().decode()

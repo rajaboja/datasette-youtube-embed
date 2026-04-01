@@ -3,6 +3,8 @@ from urllib.parse import urlparse, parse_qsl
 import markupsafe
 import textwrap
 
+_loader = '<img src="" onerror="if(!window._lyt){window._lyt=1;fetch(&quot;https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.js&quot
+;).then(r=>r.text()).then(eval)}" style="display:none">'
 
 @hookimpl
 def render_cell(value):
@@ -40,17 +42,9 @@ def render_cell(value):
     extras = ""
     if extra_bits:
         extras = "&".join(extra_bits)
-
-    return markupsafe.Markup(
-        f'<lite-youtube videoid="{video_id}" params="{extras}" style="min-width: 200px"></lite-youtube>'
-    )
-
+    
+    return markupsafe.Markup(_loader + f'<lite-youtube videoid="{video_id}" params="{extras}" style="min-width: 200px"></lite-youtube>')
 
 @hookimpl
 def extra_css_urls():
     return ["https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.css"]
-
-@hookimpl
-def extra_body_script():
-    import urllib.request
-    return urllib.request.urlopen('https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.4/src/lite-yt-embed.js').read().decode()
